@@ -1,0 +1,92 @@
+-- Requires
+local config = require(script.Parent)
+--require(script.BRANDING)
+--require(config.branding)
+-- Locals
+local debounce = false
+local debounce_time = config["Debounce Time"]
+local mode = config.Mode
+-- Onboot
+local function startup()
+	print("Thank you for using yep_zane's Itab gate")
+	script.BRANDING.SurfaceGui.TextLabel.Text = "Itab by yep_zane"
+	script.Parent.Parent.Right.Door.Hinge.HingeConstraint.AngularSpeed = config.Hingespeed
+	script.Parent.Parent.Left.Door.Hinge.HingeConstraint.AngularSpeed = config.Hingespeed
+end
+
+script.Parent.Parent.HitIN.Touched:Connect(function ()
+	if mode == "IN"  and debounce == false then
+		debounce = true
+		script.Parent.Parent.Left.Door.Hinge.HingeConstraint.TargetAngle = 90
+		script.Parent.Parent.Right.Door.Hinge.HingeConstraint.TargetAngle = -90
+		if config.Debug == true then
+			print("ITAB-GATE OPENED ON INNER SIDE")
+		end
+		wait(5)
+		script.Parent.Parent.Left.Door.Hinge.HingeConstraint.TargetAngle = 0
+		script.Parent.Parent.Right.Door.Hinge.HingeConstraint.TargetAngle = 0
+		if config.Debug == true then
+			print("ITAB-GATE CLOSED")
+		end
+		wait(config["Debounce Time"])
+		debounce = false
+	end
+end)
+script.Parent.Parent.HitOUT.Touched:Connect(function ()
+	if mode == "OUT"  and debounce == false then
+		debounce = true
+		script.Parent.Parent.Left.Door.Hinge.HingeConstraint.TargetAngle = 90
+		script.Parent.Parent.Right.Door.Hinge.HingeConstraint.TargetAngle = -90
+		if config.Debug == true then
+			print("ITAB-GATE OPENED ON OUTER SIDE")
+		end
+		wait(5)
+		script.Parent.Parent.Left.Door.Hinge.HingeConstraint.TargetAngle = 0
+		script.Parent.Parent.Right.Door.Hinge.HingeConstraint.TargetAngle = 0
+		if config.Debug == true then
+			print("ITAB-GATE CLOSED")
+		end
+		wait(config["Debounce Time"])
+		debounce = false
+	end
+end)
+script.Parent.Parent.HitOUT.Touched:Connect(function ()
+	if mode == "BOTH"  and debounce == false then
+		debounce = true
+		script.Parent.Parent.Left.Door.Hinge.HingeConstraint.TargetAngle = 90
+		script.Parent.Parent.Right.Door.Hinge.HingeConstraint.TargetAngle = -90
+		if config.Debug == true then
+			print("ITAB-GATE OPENED ON OUTER")
+		end
+		wait(5)
+		script.Parent.Parent.Left.Door.Hinge.HingeConstraint.TargetAngle = 0
+		script.Parent.Parent.Right.Door.Hinge.HingeConstraint.TargetAngle = 0
+		if config.Debug == true then
+			print("ITAB-GATE CLOSED")
+		end
+		wait(config["Debounce Time"])
+		debounce = false
+	end
+end)
+script.Parent.Parent.HitIN.Touched:Connect(function ()
+	if mode == "BOTH"  and debounce == false then
+		debounce = true
+		script.Parent.Parent.Left.Door.Hinge.HingeConstraint.TargetAngle = 90
+		script.Parent.Parent.Right.Door.Hinge.HingeConstraint.TargetAngle = -90
+		if config.Debug == true then
+			print("ITAB-GATE OPENED ON INNER")
+		end
+		wait(5)
+		script.Parent.Parent.Left.Door.Hinge.HingeConstraint.TargetAngle = 0
+		script.Parent.Parent.Right.Door.Hinge.HingeConstraint.TargetAngle = 0
+		if config.Debug == true then
+			print("ITAB-GATE CLOSED")
+		end
+		wait(config["Debounce Time"])
+		debounce = false
+	end
+end)
+
+
+
+startup()
