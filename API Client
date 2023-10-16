@@ -1,0 +1,29 @@
+local master = require(game.ServerScriptService["ITAB FIRE CONTROL"])
+--[[
+..######....#######...######...########...#######...######..########.########..##....##
+	.##....##..##.....##.##....##..##.....##.##.....##.##....##.##.......##.....##..##..##.
+	.##........##.....##.##........##.....##.##.....##.##.......##.......##.....##...####..
+	.##...####.##.....##.##...####.########..##.....##.##.......######...########.....##...
+	.##....##..##.....##.##....##..##...##...##.....##.##.......##.......##...##......##...
+	.##....##..##.....##.##....##..##....##..##.....##.##....##.##.......##....##.....##...
+	..######....#######...######...##.....##..#######...######..########.##.....##....##...
+	]]
+while true do
+	if master["FIRE HOLD"] == true  then
+		script.Parent.Loader.Enabled = false
+		script.Parent.Parent.Left.Door.Hinge.HingeConstraint.TargetAngle = 90
+		script.Parent.Parent.Right.Door.Hinge.HingeConstraint.TargetAngle = -90
+	elseif master["FIRE HOLD"] == false then
+		script.Parent.Parent.Left.Door.Hinge.HingeConstraint.TargetAngle = 0
+		script.Parent.Parent.Right.Door.Hinge.HingeConstraint.TargetAngle = 0
+	elseif master["FIRE LOCK"] == true then
+		script.Parent.Parent.Left.Door.Hinge.HingeConstraint.TargetAngle = 0
+		script.Parent.Parent.Right.Door.Hinge.HingeConstraint.TargetAngle = 0
+		script.Parent.Loader.Enabled = false
+	elseif master["FIRE LOCK"] == false then
+		script.Parent.Loader.Enabled = true
+end
+end
+
+-- Place this inside the config script so its inside the same script the loader is
+-- made by yep_zane
