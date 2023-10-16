@@ -1,0 +1,10 @@
+local module = {
+	["FIRE HOLD"] = false,
+	["FIRE LOCK"] = false
+}
+
+return module
+
+-- Paste this inside a modual script 
+-- Name it "ITAB FIRE CONTROL"
+-- Place it inside server script service
