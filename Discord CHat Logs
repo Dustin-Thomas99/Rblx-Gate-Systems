@@ -1,0 +1,33 @@
+local branding [[
+  _______   _______   ___       ___  ___       _______       __  ___________  _______       ________  ___  ___  ________  
+ /"      \ |   _  "\ |"  |     |"  \/"  |     /" _   "|     /""\("     _   ")/"     "|     /"       )|"  \/"  |/"       )    V1.0 Free File DO NOT SELL
+|:        |(. |_)  :)||  |      \   \  /     (: ( \___)    /    \)__/  \\__/(: ______)    (:   \___/  \   \  /(:   \___/     https://discord.gg/9p6zAFZAgr
+|_____/   )|:     \/ |:  |       \\  \/       \/ \        /' /\  \  \\_ /    \/    |       \___  \     \\  \/  \___  \    
+ //      / (|  _  \\  \  |___    /\.  \       //  \ ___  //  __'  \ |.  |    // ___)_       __/  \\    /   /    __/  \\   
+|:  __   \ |: |_)  :)( \_|:  \  /  \   \     (:   _(  _|/   /  \\  \\:  |   (:      "|     /" \   :)  /   /    /" \   :)  
+|__|  \___)(_______/  \_______)|___/\___|     \_______)(___/    \___)\__|    \_______)    (_______/  |___/    (_______/   
+Chatlogs Webhook; Roblx --> Discord
+]]
+
+-- SETUP GUIDE
+-- 1) Place this script within ServerScriptService
+-- 2) Change the WebhookURL to your WebhookURL (SIDENOTE: I highly reccomend putting your URL thru this website https://webhook.newstargeted.com/)
+local WebhookURL = "https://webhook.newstargeted.com/api/webhooks/{WEBHOOK_ID}/{WEBHOOK_TOKEN}" -- use this system to ensure it work within a normal instance 
+local user = "Chatlogs" -- The name you would like the Username to appear as
+local https = game:GetService("HttpService")
+function sendDiscordMessage(message, name)
+	local info = {
+		content = "**"..name.."**: "..message.."",
+		username = user
+	}
+	local encoded = https:JSONEncode(info)
+	https:PostAsync(WebhookURL, encoded)
+end
+game.Players.PlayerAdded:Connect(function(player)
+	local name = player.DisplayName .. " (@" .. player.Name .. ")"
+	player.Chatted:Connect(function(message)
+		sendDiscordMessage(message, name)
+	end)
+end)
+
+
